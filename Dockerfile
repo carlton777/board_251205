@@ -2,8 +2,8 @@ FROM eclipse-temurin:17
 
 WORKDIR /app
 
-COPY build/libs/*.jar app.jar
-#COPY . .
+#COPY build/libs/*.jar app.jar
+COPY . .
 #
 ## 개행문자 오류 해결 [unix와 window 시스템 차이]
 #RUN sed -i 's/\r$//' gradlew
