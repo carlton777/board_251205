@@ -1,0 +1,24 @@
+services:
+  mariadb:
+    image: mariadb
+    command: --default-authentication-plugin=caching_sha2_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'sola'
+      MYSQL_ROOT_PASSWORD: '1234'
+#      MYSQL_USER: 'bpk'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '1234'
+#      MYSQL_HOST: '%'
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      -  C:\temp3\board_251205\data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+  spring-app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
